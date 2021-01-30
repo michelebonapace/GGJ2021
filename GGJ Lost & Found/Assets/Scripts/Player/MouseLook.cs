@@ -31,9 +31,10 @@ public class MouseLook : MonoBehaviour
         float mouseY = Mouse.current.delta.y.ReadValue() * (mouseSensitivity / 100f);
 
         verticalAxisRotation -= mouseY;
-        verticalAxisRotation = Mathf.Clamp(verticalAxisRotation, -90f, 90f);
+        verticalAxisRotation = Mathf.Clamp(verticalAxisRotation, -80f, 70f);
 
-        transform.localRotation = Quaternion.Euler(verticalAxisRotation, 0, 0f);
+        closestPosition.localRotation = Quaternion.Euler(verticalAxisRotation, 0, 0f);
+        transform.LookAt(closestPosition);
 
         playerBody.Rotate(Vector3.up * mouseX);
     }
