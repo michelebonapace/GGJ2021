@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
-
-
     private void FixedUpdate()
     {
         Vector3 move = movInput.y * transform.forward * speed;
