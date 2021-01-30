@@ -61,13 +61,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!isStunned)
         {
-            Vector3 move = movInput.y * transform.forward * speed;
+            Vector3 move = (transform.right * movInput.x + transform.forward * movInput.y) * speed;
             move.y = body.velocity.y;
 
             body.velocity = move + totalBeltSpeed;
         }
-
-        body.angularVelocity = new Vector3(0, movInput.x * rotationSpeed, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -111,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(isGrounded)
+        if (isGrounded)
         {
             body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
