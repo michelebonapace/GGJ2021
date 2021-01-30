@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Section : MonoBehaviour
 {
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -13,8 +13,4 @@ public class Section : MonoBehaviour
         }
     }
 
-    public void Convert()
-    {
-
-    }
 }
