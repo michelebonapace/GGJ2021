@@ -15,15 +15,15 @@ public class PlayerController : MonoBehaviour
 
     private List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
 
-    private Vector3 totalBeltSpeed;
+    private Vector3 totalBeltSpeed = Vector3.zero;
     private Vector2 movInput;
+
+    public Rigidbody Body { get => body; }
 
     public void Start()
     {
         body = GetComponent<Rigidbody>();
     }
-
-
 
     private void FixedUpdate()
     {
@@ -38,7 +38,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<ConveyorBelt>() is ConveyorBelt conveyorBelt && !conveyorBelts.Contains(conveyorBelt))
+        if (collision.gameObject.GetComponent<ConveyorBelt>() is ConveyorBelt conveyorBelt
+            && conveyorBelt.isActiveAndEnabled
+            && !conveyorBelts.Contains(conveyorBelt))
         {
             conveyorBelts.Add(conveyorBelt);
             CalculateBeltSpeed();
