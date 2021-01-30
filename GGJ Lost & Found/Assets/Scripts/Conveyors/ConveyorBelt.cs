@@ -17,7 +17,7 @@ public class ConveyorBelt : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 position = beltBody.position;
-        beltBody.position += -transform.forward * speed * Time.fixedDeltaTime;
+        beltBody.position += -transform.right * speed * Time.fixedDeltaTime;
         beltBody.MovePosition(position);
     }
 }
