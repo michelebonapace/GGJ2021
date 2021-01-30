@@ -10,7 +10,7 @@ public class ExplosiveLuggage : Luggage
     public float explosionUpForce = 1f;
 
     PlayerController player;
-    PlayerController Player { get { if (player == null) player = FindObjectOfType<PlayerController>(); return player; } }
+    PlayerController Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
 
     private void OnCollisionEnter(Collision collision)
     {
