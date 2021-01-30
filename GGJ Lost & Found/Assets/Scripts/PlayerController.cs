@@ -6,17 +6,35 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody body;
+
+    [Header("Stats")]
     [SerializeField]
     private float jumpForce;
     [SerializeField]
     private float speed;
     [SerializeField]
     private float rotationSpeed;
+    [SerializeField]
+    private float stunTime;
 
     private List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
 
     private Vector3 totalBeltSpeed = Vector3.zero;
     private Vector2 movInput;
+
+    private float stunTimer = 0f;
+
+    private bool isStunned = false;
+    private bool isGrounded = false;
+
+    #region GROUND CHECK
+
+    [Header("Ground Check variables")]
+    public Transform feet;
+    public LayerMask groundMask;
+    public float groundDistance = 0.4f;
+
+    #endregion
 
     public Rigidbody Body { get => body; }
 
@@ -25,15 +43,31 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        isGrounded = Physics.CheckSphere(feet.position, groundDistance, groundMask);
+
+        if (stunTimer > 0)
+        {
+            stunTimer -= Time.deltaTime;
+        }
+        else if (isGrounded)
+        {
+            isStunned = false;
+        }
+    }
+
     private void FixedUpdate()
     {
-        Vector3 move = movInput.y * transform.forward * speed;
-        move.y = body.velocity.y;
+        if (!isStunned)
+        {
+            Vector3 move = movInput.y * transform.forward * speed;
+            move.y = body.velocity.y;
 
-        //body.AddForce(movInput.y * transform.forward * speed, ForceMode.Force);
+            body.velocity = move + totalBeltSpeed;
+        }
+
         body.angularVelocity = new Vector3(0, movInput.x * rotationSpeed, 0);
-
-        body.velocity = move + totalBeltSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -69,9 +103,18 @@ public class PlayerController : MonoBehaviour
         totalBeltSpeed = tempVelocity;
     }
 
+    public void StunPlayer()
+    {
+        stunTimer = stunTime;
+        isStunned = true;
+    }
+
     public void OnJump(InputAction.CallbackContext context)
     {
-        body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if(isGrounded)
+        {
+            body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
