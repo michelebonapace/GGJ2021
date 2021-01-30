@@ -5046,6 +5046,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6102755513865920865, guid: 898c1e193cfdbf845b997215b660a786,
+        type: 3}
+      propertyPath: wallMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6102755513865920869, guid: 898c1e193cfdbf845b997215b660a786,
         type: 3}
       propertyPath: m_RootOrder

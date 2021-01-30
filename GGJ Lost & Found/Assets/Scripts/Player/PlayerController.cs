@@ -64,7 +64,17 @@ public class PlayerController : MonoBehaviour
             Vector3 move = (transform.right * movInput.x + transform.forward * movInput.y) * speed;
             move.y = body.velocity.y;
 
-            body.velocity = move + totalBeltSpeed;
+            Vector3 movingDirection = (transform.right * movInput.x + transform.forward * movInput.y).normalized;
+            RaycastHit raycastHit;
+
+            if (body.SweepTest(movingDirection, out raycastHit, movingDirection.magnitude * speed * Time.fixedDeltaTime) && !raycastHit.collider.isTrigger)
+            {
+                body.velocity = new Vector3(0, move.y, 0);
+            }
+            else
+            {
+                body.velocity = move + totalBeltSpeed;
+            }
         }
     }
 
