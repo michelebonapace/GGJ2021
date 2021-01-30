@@ -47,7 +47,6 @@ public class Gamemanager : Singleton<Gamemanager>
     {
         if (Player != null)
         {
-            Debug.Log("Onsceneloaded");
             StartNewGame();
         }
     }
