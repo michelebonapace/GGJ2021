@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightOffset: 0.2
-  bounceStrenght: 4
+  bounceStrenght: 25
 --- !u!54 &7104232570545818989
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -49,20 +49,22 @@ public class PenguinMouseLook : MonoBehaviour
     {
         closestFollower.transform.position = Vector3.SmoothDamp(closestFollower.transform.position, closestPosition.transform.position, ref currentVelocity, 0.1f);
 
-        #region WALL CHECK
+        transform.position = targetPosition.position;
 
-        Vector3 direction = (targetPosition.position - closestPosition.position).normalized;
-        Debug.DrawLine(closestPosition.position, targetPosition.position, Color.red);
+        //#region WALL CHECK
 
-        if (Physics.Raycast(closestPosition.position, direction, out positionRaycastHit, camPointsDistance))
-        {
-            transform.position = positionRaycastHit.point;
-        }
-        else
-        {
-            transform.position = targetPosition.position;
-        }
+        //Vector3 direction = (targetPosition.position - closestPosition.position).normalized;
+        //Debug.DrawLine(closestPosition.position, targetPosition.position, Color.red);
 
-        #endregion
+        //if (Physics.Raycast(closestPosition.position, direction, out positionRaycastHit, camPointsDistance))
+        //{
+        //    transform.position = positionRaycastHit.point;
+        //}
+        //else
+        //{
+        //    transform.position = targetPosition.position;
+        //}
+
+        //#endregion
     }
 }
