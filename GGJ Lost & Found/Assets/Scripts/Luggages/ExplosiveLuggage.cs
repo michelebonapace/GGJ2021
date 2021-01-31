@@ -12,8 +12,8 @@ public class ExplosiveLuggage : Luggage
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private float explosionUpForce = 1f;
 
-    PlayerController player;
-    PlayerController Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
+    Player player;
+    Player Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
 
     private void OnCollisionEnter(Collision collision)
     {

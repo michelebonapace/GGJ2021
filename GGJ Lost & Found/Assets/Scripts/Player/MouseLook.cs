@@ -41,6 +41,8 @@ public class MouseLook : MonoBehaviour
 
     private void FixedUpdate()
     {
+        #region WALL CHECK
+
         Vector3 direction = (targetPosition.position - closestPosition.position).normalized;
         Debug.DrawLine(closestPosition.position, targetPosition.position, Color.red);
 
@@ -52,5 +54,7 @@ public class MouseLook : MonoBehaviour
         {
             transform.position = targetPosition.position;
         }
+
+        #endregion
     }
 }

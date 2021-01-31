@@ -11,12 +11,12 @@ public class Gamemanager : Singleton<Gamemanager>
 
     public float gameTime;
 
-    private PlayerController player;
+    private Player player;
 
     private float gameTimer;
     private bool hasGameStarted = false;
 
-    public PlayerController Player { get { if (player == null) player = FindObjectOfType<PlayerController>(); return player; } }
+    public Player Player { get { if (player == null) player = FindObjectOfType<Player>(); return player; } }
     public float GetCurrentGameTimer { get => gameTimer; }
 
     private void OnEnable()
