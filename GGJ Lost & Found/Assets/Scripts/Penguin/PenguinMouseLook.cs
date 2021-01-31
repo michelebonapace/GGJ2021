@@ -16,6 +16,7 @@ public class PenguinMouseLook : MonoBehaviour
     private RaycastHit positionRaycastHit;
 
     private float verticalAxisRotation = 0f;
+    private float horizontalAxisRotation = 0f;
     private float camPointsDistance;
 
     void Start()
@@ -23,7 +24,7 @@ public class PenguinMouseLook : MonoBehaviour
         if (playerBody == null)
             playerBody = Gamemanager.Instance.Player.transform;
 
-        camPointsDistance = Vector3.Distance(targetPosition.position, closestPosition.position);
+        camPointsDistance = Vector3.Distance(targetPosition.position, closestFollower.position);
         Cursor.lockState = CursorLockMode.Locked;
 
     }
@@ -33,12 +34,13 @@ public class PenguinMouseLook : MonoBehaviour
         float mouseX = Mouse.current.delta.x.ReadValue() * (mouseSensitivity / 100f);
         float mouseY = Mouse.current.delta.y.ReadValue() * (mouseSensitivity / 100f);
 
-        closestFollower.Rotate(Vector3.right * -mouseY);
-
-        closestFollower.Rotate(Vector3.up * mouseX);
+        horizontalAxisRotation += mouseX;
+        //closestFollower.Rotate(Vector3.up * mouseX);
 
         verticalAxisRotation -= mouseY;
         verticalAxisRotation = Mathf.Clamp(verticalAxisRotation, -80f, 70f);
+
+        closestFollower.localRotation = Quaternion.Euler(verticalAxisRotation, horizontalAxisRotation, 0f);
 
         transform.LookAt(closestFollower);
     }

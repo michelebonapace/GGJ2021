@@ -8,20 +8,20 @@ using Random = UnityEngine.Random;
 public class PlayerController : Player
 {
     [Header("Stats")]
-    [SerializeField]
-    private float jumpForce;
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float rotationSpeed;
-    [SerializeField]
-    private float stunTime;
+
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float speed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float stunTime;
+
+    [SerializeField] private float freezeRotationSpeed = 5;
 
     private List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
     private Animator animator;
     private AudioSource audioSource;
 
     private Vector3 totalBeltSpeed = Vector3.zero;
+    private Quaternion targetRotation;
     private Vector2 movInput;
 
     private float stunTimer = 0f;
@@ -80,10 +80,13 @@ public class PlayerController : Player
     {
         if (!isStunned)
         {
-            Vector3 move = (transform.right * movInput.x + transform.forward * movInput.y) * speed;
+            UpdateRotation();
+
+            Vector3 move = isMoving ? transform.forward * speed : Vector3.zero;
             move.y = body.velocity.y;
 
-            Vector3 movingDirection = (transform.right * movInput.x + transform.forward * movInput.y).normalized;
+            //Vector3 movingDirection = (transform.right * movInput.x + transform.forward * movInput.y).normalized;
+            Vector3 movingDirection = transform.forward;
             RaycastHit raycastHit;
 
             if (body.SweepTest(movingDirection, out raycastHit, movingDirection.magnitude * speed * Time.fixedDeltaTime) && !raycastHit.collider.isTrigger)
@@ -94,6 +97,26 @@ public class PlayerController : Player
             {
                 body.velocity = move + totalBeltSpeed;
             }
+        }
+    }
+
+    private void UpdateRotation()
+    {
+        var aimDirection = Camera.main.transform.forward;
+
+        float angleOffset = Vector2.SignedAngle(movInput, Vector2.up);
+        Vector3 targetForward = Quaternion.AngleAxis(angleOffset, Vector3.up) * Vector3.ProjectOnPlane(aimDirection, Vector3.up).normalized;
+
+        if (targetForward != Vector3.zero)
+            targetRotation = Quaternion.LookRotation(targetForward, Vector3.up);
+        else
+            targetRotation = Quaternion.identity;
+
+        if (isMoving)
+        {
+            var smoothedRot = Quaternion.Lerp(transform.rotation,
+                                targetRotation, Time.fixedDeltaTime * freezeRotationSpeed);
+            Body.MoveRotation(smoothedRot);
         }
     }
 
