@@ -11,6 +11,8 @@ public class CharacterController : Player
     [SerializeField] public PhysicsHandler _physics;
 
     [SerializeField] private bool _enableMovement = true;
+    [SerializeField] private float _jumpForce = 3f;
+
     private Vector2 _movement;
 
     private Vector3 _aimDirection;
@@ -71,5 +73,12 @@ public class CharacterController : Player
     private void OnMove(InputValue value)
     {
         _movement = value.Get<Vector2>();
+    }
+
+    private void OnJump(InputValue value)
+    {
+        _animationController.Animator.SetTrigger("Jump");
+
+        body.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 }

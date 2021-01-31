@@ -1993,11 +1993,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4faa318e85fcff4cbeb80c0409bbf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
+  body: {fileID: 321581411}
   _activeRagdoll: {fileID: 1450841328}
   _animationController: {fileID: 1450841327}
   _physics: {fileID: 1450841324}
   _enableMovement: 1
+  _jumpForce: 50
 --- !u!114 &1450841327
 MonoBehaviour:
   m_ObjectHideFlags: 0
