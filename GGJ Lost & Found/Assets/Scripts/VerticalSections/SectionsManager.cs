@@ -49,12 +49,12 @@ public class SectionsManager : MonoBehaviour
             {
                 if (t.name.Equals("Conveyor"))
                 {
-                    if (UnityEngine.Random.Range(0, 4) <= 1)
+                    if (UnityEngine.Random.Range(0, 5) <= 1)
                     {
-                        int rand = UnityEngine.Random.Range(0, 99);
+                        int rand = UnityEngine.Random.Range(0, 100);
                         if (rand < 70)
                         {
-                            int r = UnityEngine.Random.Range(0, normalLuggage.Length - 1);
+                            int r = UnityEngine.Random.Range(0, normalLuggage.Length );
                             Instantiate(normalLuggage[r], t.transform.position + Vector3.up * 2, normalLuggage[r].transform.rotation);
                         }
                         else if (rand < 80)
@@ -109,7 +109,7 @@ public class SectionsManager : MonoBehaviour
     }
 
     public void ReplaceLuggage(Transform luggage) {
-        int rand = UnityEngine.Random.Range(0, totalSections - 1);
+        int rand = UnityEngine.Random.Range(0, totalSections);
         sectionsInstances[rand].ReplaceLuggage(luggage);
     }
 }
