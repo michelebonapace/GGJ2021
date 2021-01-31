@@ -83,6 +83,11 @@ public class Gamemanager : Singleton<Gamemanager>
         totalScore += amount;
     }
 
+    public void AddTime(float amount)
+    {
+        gameTimer += amount;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (Player != null)

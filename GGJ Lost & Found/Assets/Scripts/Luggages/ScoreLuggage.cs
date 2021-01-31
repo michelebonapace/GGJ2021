@@ -16,7 +16,7 @@ public class ScoreLuggage : MonoBehaviour
         if (collision.transform.tag =="Player")
         {
             Gamemanager.Instance.AddScore(score);
-            Gamemanager.Instance.gameTime += time;
+            Gamemanager.Instance.AddTime(time);
             SectionsManager.Instance.ReplaceLuggage(transform);
         }
     }
