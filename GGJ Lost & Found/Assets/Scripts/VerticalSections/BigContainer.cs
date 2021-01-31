@@ -10,5 +10,11 @@ public class BigContainer : MonoBehaviour
         {
             SectionsManager.Instance.ReplaceLuggage(other.transform);
         }
+
+        if (other.tag == "Player")
+        {
+            Gamemanager.Instance.EndGame();
+        }
     }
+
 }

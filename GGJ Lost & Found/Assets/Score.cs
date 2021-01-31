@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         score = PlayerPrefs.GetInt("Score", 0);
         if (score != 0)
         {
