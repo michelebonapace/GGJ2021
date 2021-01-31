@@ -13,11 +13,29 @@ public class Gamemanager : Singleton<Gamemanager>
 
     private Player player;
 
-    private float gameTimer;
+    private int totalScore = 0;
+    private float gameTimer = 0f;
     private bool hasGameStarted = false;
 
     public Player Player { get { if (player == null) player = FindObjectOfType<Player>(); return player; } }
     public float GetCurrentGameTimer { get => gameTimer; }
+
+    public override void Awake()
+    {
+        dontDestroy = true;
+
+        base.Awake();
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
+    }
 
     private void OnEnable()
     {
@@ -41,6 +59,24 @@ public class Gamemanager : Singleton<Gamemanager>
 
             OnGameEnd?.Invoke();
         }
+    }
+
+    public (float, float) GetRemainingTime()
+    {
+        float minutes = Mathf.FloorToInt(gameTimer / 60);
+        float seconds = Mathf.FloorToInt(gameTimer % 60);
+
+        return (minutes, seconds);
+    }
+
+    public int GetCurrentScore()
+    {
+        return totalScore;
+    }
+
+    public void AddScore(int amount)
+    {
+        totalScore += amount;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
