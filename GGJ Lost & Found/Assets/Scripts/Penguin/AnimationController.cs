@@ -50,7 +50,6 @@ public class AnimationController : MonoBehaviour
 
     private void UpdateIK()
     {
-        AimDirection = AimDirection;
         _animTorso = _activeRagdollMovement.AnimatedTorso;
         _targetDir2D = GetFloorProjection(AimDirection);
     }

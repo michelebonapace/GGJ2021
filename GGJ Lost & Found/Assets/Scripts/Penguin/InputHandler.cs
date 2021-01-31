@@ -8,12 +8,12 @@ public class InputHandler : MonoBehaviour
     [SerializeField] protected ActiveRagdollMovement _activeRagdoll;
     public ActiveRagdollMovement ActiveRagdoll { get { return _activeRagdoll; } }
 
-    public delegate void onMoveDelegate(Vector2 movement);
-    public onMoveDelegate OnMoveDelegates { get; set; }
-    public void OnMove(InputValue value)
-    {
-        OnMoveDelegates?.Invoke(value.Get<Vector2>());
-    }
+    //public delegate void onMoveDelegate(Vector2 movement);
+    //public onMoveDelegate OnMoveDelegates { get; set; }
+    //public void OnMove(InputValue value)
+    //{
+    //    OnMoveDelegates?.Invoke(value.Get<Vector2>());
+    //}
 
     public float floorDetectionDistance = 0.3f;
     public float maxFloorSlope = 60;
@@ -28,17 +28,12 @@ public class InputHandler : MonoBehaviour
         UpdateOnFloor();
     }
 
-    public delegate void onFloorChangedDelegate(bool onFloor);
-    public onFloorChangedDelegate OnFloorChangedDelegates { get; set; }
     private void UpdateOnFloor()
     {
         bool lastIsOnFloor = _isOnFloor;
 
         _isOnFloor = CheckRigidbodyOnFloor(_rightFoot, out Vector3 foo)
                      || CheckRigidbodyOnFloor(_leftFoot, out foo);
-
-        if (_isOnFloor != lastIsOnFloor)
-            OnFloorChangedDelegates(_isOnFloor);
     }
 
     public bool CheckRigidbodyOnFloor(Rigidbody bodyPart, out Vector3 normal)

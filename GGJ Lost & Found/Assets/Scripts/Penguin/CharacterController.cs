@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController : Player
 {
 
     [SerializeField] public ActiveRagdollMovement _activeRagdoll;
@@ -16,7 +17,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        _activeRagdoll.Input.OnMoveDelegates += MovementInput;
+        //_activeRagdoll.Input.OnMoveDelegates += MovementInput;
         //_activeRagdoll.Input.OnMoveDelegates += _physics.ManualTorqueInput;
         //_activeRagdoll.Input.OnFloorChangedDelegates += ProcessFloorChanged;
     }
@@ -27,6 +28,10 @@ public class CharacterController : MonoBehaviour
 
         _aimDirection = Camera.main.transform.forward;
         _animationController.AimDirection = _aimDirection;
+    }
+
+    private void FixedUpdate()
+    {
         UpdateMovement();
     }
 
@@ -63,8 +68,8 @@ public class CharacterController : MonoBehaviour
         //}
     }
 
-    private void MovementInput(Vector2 movement)
+    private void OnMove(InputValue value)
     {
-        _movement = movement;
+        _movement = value.Get<Vector2>();
     }
 }
