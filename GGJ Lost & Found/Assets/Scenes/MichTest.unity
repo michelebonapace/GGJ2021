@@ -156,7 +156,12 @@ MonoBehaviour:
   - {fileID: 5675931931499907872, guid: 1defe9fae863d9e4797f70335d09f390, type: 3}
   - {fileID: 4612985391548775241, guid: a1958f3f140e7c247bc3fdc040c26d5d, type: 3}
   - {fileID: 4086450416356862741, guid: 519ac6f18610b344d8f1d5f0310a53dd, type: 3}
+  normalLuggage:
+  - {fileID: 8916567325269838919, guid: 994ca882b1e4f4e4db0833a602639094, type: 3}
+  - {fileID: 1546933288627002218, guid: efc9804326f72314381697312c492e04, type: 3}
   explosiveLuggage: {fileID: 4130741740478313891, guid: f810a57fd390f4d4ab9152c777b00ca2,
+    type: 3}
+  bouncingLuggage: {fileID: 2372513398225529040, guid: 7bdb60dc677ea1d43ba9b485c43c45b6,
     type: 3}
   target: {fileID: 6379029292376027446, guid: ab443f0c5b70c5b438dba843dd565554, type: 3}
 --- !u!4 &488053843

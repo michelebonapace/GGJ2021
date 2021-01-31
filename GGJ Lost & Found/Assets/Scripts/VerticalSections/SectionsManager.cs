@@ -10,7 +10,9 @@ public class SectionsManager : MonoBehaviour
     public int instancesPerSection = 2;
     public float sectionsHeight = 5;
     public GameObject[] sectionsPrefabs;
+    public GameObject[] normalLuggage;
     public GameObject explosiveLuggage;
+    public GameObject bouncingLuggage;
     public GameObject target;
 
     private List<Section> sectionsInstances;
@@ -46,13 +48,26 @@ public class SectionsManager : MonoBehaviour
             {
                 if (t.name.Equals("Conveyor"))
                 {
-                    if (UnityEngine.Random.Range(0, 8) <= 0)
+                    if (UnityEngine.Random.Range(0, 4) <= 1)
                     {
-                        Instantiate(explosiveLuggage, t.transform.position + Vector3.up * 2, explosiveLuggage.transform.rotation);
-                    }
-                    else if (UnityEngine.Random.Range(0, 100) <= 0)
-                    {
-                        Instantiate(target, t.transform.position + Vector3.up * 2, target.transform.rotation);
+                        int rand = UnityEngine.Random.Range(0, 99);
+                        if (rand < 70)
+                        {
+                            int r = UnityEngine.Random.Range(0, normalLuggage.Length - 1);
+                            Instantiate(normalLuggage[r], t.transform.position + Vector3.up * 2, normalLuggage[r].transform.rotation);
+                        }
+                        else if (rand < 80)
+                        {
+                            Instantiate(explosiveLuggage, t.transform.position + Vector3.up * 2, explosiveLuggage.transform.rotation);
+                        }
+                        else if (rand < 90)
+                        {
+                            Instantiate(explosiveLuggage, t.transform.position + Vector3.up * 2, explosiveLuggage.transform.rotation);
+                        }
+                        else
+                        {
+                            Instantiate(target, t.transform.position + Vector3.up * 2, target.transform.rotation);
+                        }
                     }
                 }
             }
