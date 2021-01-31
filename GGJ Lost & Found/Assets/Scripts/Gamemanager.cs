@@ -111,6 +111,7 @@ public class Gamemanager : Singleton<Gamemanager>
         PlayerPrefs.SetInt("Score", totalScore);
 
         audioSource.PlayOneShot(endGameClips[UnityEngine.Random.Range(0, endGameClips.Length)]);
+        Cursor.lockState = CursorLockMode.None;
 
         OnGameEnd?.Invoke();
         LoadScene(0);
