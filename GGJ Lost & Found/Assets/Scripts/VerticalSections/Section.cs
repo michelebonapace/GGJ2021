@@ -36,7 +36,7 @@ public class Section : MonoBehaviour
         bool found = false;
         while (!found)
         {
-            int rand = Random.Range(0, doors.Length - 1);
+            int rand = Random.Range(0, doors.Length);
             if (doors[rand].doorType == TeleportDoor.DoorType.Output)
             {
                 found = true;
