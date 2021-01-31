@@ -7,8 +7,8 @@ public class BouncingLuggage : Luggage
     public float heightOffset = 0.2f;
     public float bounceStrenght = 4f;
 
-    PlayerController player;
-    PlayerController Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
+    Player player;
+    Player Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
 
     private void OnCollisionEnter(Collision collision)
     {

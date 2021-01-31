@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Player
 {
-    private Rigidbody body;
 
     [Header("Stats")]
     [SerializeField]
@@ -36,11 +35,11 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public Rigidbody Body { get => body; }
 
     public void Start()
     {
-        body = GetComponent<Rigidbody>();
+        if (body == null)
+            body = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -64,7 +63,17 @@ public class PlayerController : MonoBehaviour
             Vector3 move = (transform.right * movInput.x + transform.forward * movInput.y) * speed;
             move.y = body.velocity.y;
 
-            body.velocity = move + totalBeltSpeed;
+            Vector3 movingDirection = (transform.right * movInput.x + transform.forward * movInput.y).normalized;
+            RaycastHit raycastHit;
+
+            if (body.SweepTest(movingDirection, out raycastHit, movingDirection.magnitude * speed * Time.fixedDeltaTime) && !raycastHit.collider.isTrigger)
+            {
+                body.velocity = new Vector3(0, move.y, 0);
+            }
+            else
+            {
+                body.velocity = move + totalBeltSpeed;
+            }
         }
     }
 
@@ -101,7 +110,7 @@ public class PlayerController : MonoBehaviour
         totalBeltSpeed = tempVelocity;
     }
 
-    public void StunPlayer()
+    public override void StunPlayer()
     {
         stunTimer = stunTime;
         isStunned = true;

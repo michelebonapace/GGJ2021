@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ExplosiveLuggage : Luggage
 {
-    public float heightOffset = 0.2f;
-    public float explosionStrenght = 5f;
-    public float explosionRadius = 5f;
-    public float explosionUpForce = 1f;
+    [SerializeField] private VisualEffect explosionParticle = null;
 
-    PlayerController player;
-    PlayerController Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
+    [SerializeField] private float heightOffset = 0.2f;
+    [SerializeField] private float explosionStrenght = 5f;
+    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private float explosionUpForce = 1f;
+
+    Player player;
+    Player Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -29,6 +32,12 @@ public class ExplosiveLuggage : Luggage
                     rigidBody.AddExplosionForce(explosionStrenght, transform.position, explosionRadius, explosionUpForce, ForceMode.Impulse);
                 }
             }
+
+            explosionParticle.transform.parent = null;
+            explosionParticle.gameObject.AddComponent<DestroyByTime>().time = 1f;
+            explosionParticle.Play();
+
+            Destroy(gameObject);
         }
     }
 }
