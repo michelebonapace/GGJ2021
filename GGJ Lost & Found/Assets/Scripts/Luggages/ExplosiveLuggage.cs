@@ -17,7 +17,7 @@ public class ExplosiveLuggage : Luggage
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == Player.gameObject && Player.transform.position.y > transform.position.y + heightOffset)
+        if (collision.gameObject == Player.gameObject /*&& Player.transform.position.y > transform.position.y + heightOffset*/)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 

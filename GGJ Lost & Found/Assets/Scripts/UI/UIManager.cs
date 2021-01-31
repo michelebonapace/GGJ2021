@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateTimerText();
+        UpdateScoreText();
     }
 
     public void UpdateTimerText()
@@ -33,7 +34,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreText()
     {
-        var scoreTextData = scoreTextDelegate();
-        scoreText.text = "Score: " + scoreTextData;
+        scoreText.text = "Score: " + Gamemanager.Instance.GetCurrentScore();
     }
 }

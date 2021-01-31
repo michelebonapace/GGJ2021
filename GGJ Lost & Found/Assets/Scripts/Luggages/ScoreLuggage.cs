@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreLuggage : MonoBehaviour{
+public class ScoreLuggage : MonoBehaviour
+{
 
     public LayerMask playerLayer;
     public string playerTag;
     public int score;
+    public int time;
 
-    private void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision)
+    {
 
-        if ((playerLayer.value & 1 << collision.gameObject.layer) != 0 || collision.gameObject.tag.CompareTo(playerTag) == 0) {
+        if (collision.transform.tag =="Player")
+        {
             Gamemanager.Instance.AddScore(score);
-            //TODO: destroy o boh
+            Gamemanager.Instance.gameTime += time;
+            SectionsManager.Instance.ReplaceLuggage(transform);
         }
     }
 }
