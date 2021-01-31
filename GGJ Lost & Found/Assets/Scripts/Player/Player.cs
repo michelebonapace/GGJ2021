@@ -9,4 +9,5 @@ public class Player : MonoBehaviour
 
     public virtual void StunPlayer() { }
     public virtual void Scream() { }
+    public virtual void SetJumpTrigger() { }
 }

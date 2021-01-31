@@ -62,6 +62,7 @@ public class PlayerController : Player
     private void Update()
     {
         isGrounded = Physics.CheckSphere(feet.position, groundDistance, groundMask);
+        animator.SetBool("IsGrounded", isGrounded);
 
         if (stunTimer > 0)
         {
@@ -170,7 +171,13 @@ public class PlayerController : Player
         {
             audioSource.PlayOneShot(jumpClips[Random.Range(0, jumpClips.Length)]);
             body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetTrigger("Jump");
         }
+    }
+
+    public override void SetJumpTrigger()
+    {
+        animator.SetTrigger("Jump");
     }
 
     public void OnMove(InputAction.CallbackContext context)

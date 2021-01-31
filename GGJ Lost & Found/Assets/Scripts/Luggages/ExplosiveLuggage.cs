@@ -27,7 +27,7 @@ public class ExplosiveLuggage : Luggage
             explosionParticle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
 
-        audioSource = GetComponent<AudioSource>();
+        audioSource = explosionParticle.gameObject.GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -52,6 +52,7 @@ public class ExplosiveLuggage : Luggage
             explosionParticle.Play();
 
             audioSource.PlayOneShot(explosionClips[Random.Range(0, explosionClips.Length)]);
+            Player.SetJumpTrigger();
 
             SectionsManager.Instance.ReplaceLuggage(this.transform);
         }

@@ -24,6 +24,7 @@ public class BouncingLuggage : Luggage
         if (collision.gameObject == Player.gameObject && Player.transform.position.y > transform.position.y + heightOffset)
         {
             Player.Body.AddForce(Vector3.up * bounceStrenght, ForceMode.Impulse);
+            Player.SetJumpTrigger();
             audioSource.PlayOneShot(bounceClips[Random.Range(0, bounceClips.Length)]);
         }
     }
