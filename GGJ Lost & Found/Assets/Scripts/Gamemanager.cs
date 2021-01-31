@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : Singleton<Gamemanager>
 {
@@ -18,6 +19,16 @@ public class Gamemanager : Singleton<Gamemanager>
     public PlayerController Player { get { if (player == null) player = FindObjectOfType<PlayerController>(); return player; } }
     public float GetCurrentGameTimer { get => gameTimer; }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Update()
     {
         if (hasGameStarted && gameTimer > 0)
@@ -29,6 +40,14 @@ public class Gamemanager : Singleton<Gamemanager>
             hasGameStarted = false;
 
             OnGameEnd?.Invoke();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (Player != null)
+        {
+            StartNewGame();
         }
     }
 
