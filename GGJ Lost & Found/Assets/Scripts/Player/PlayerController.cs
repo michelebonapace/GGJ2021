@@ -32,7 +32,6 @@ public class PlayerController : Player
 
     #region AUDIO
 
-    [SerializeField] private AudioClip[] bounceClips = null;
     [SerializeField] private AudioClip[] footstepClips = null;
     [SerializeField] private AudioClip[] hitClips = null;
     [SerializeField] private AudioClip[] jumpClips = null;

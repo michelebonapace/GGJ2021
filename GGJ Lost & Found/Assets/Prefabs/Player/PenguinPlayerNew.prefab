@@ -1157,7 +1157,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1339,10 +1339,6 @@ MonoBehaviour:
   rotationSpeed: 3
   stunTime: 1
   freezeRotationSpeed: 5
-  bounceClips:
-  - {fileID: 8300000, guid: 11e18c0815877c74f9b421a7979f578f, type: 3}
-  - {fileID: 8300000, guid: bc5306a612768c049ac38ac3cf63522e, type: 3}
-  - {fileID: 8300000, guid: c53634336e3b9a24286e669a996e0077, type: 3}
   footstepClips:
   - {fileID: 8300000, guid: b2bcbf6446b7e324d80cb0de0082af46, type: 3}
   - {fileID: 8300000, guid: 3553582f8a7f19d4187f8c03e5d70c90, type: 3}
