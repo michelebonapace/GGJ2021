@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class ExplosiveLuggage : Luggage
 {
     [SerializeField] private VisualEffect explosionPrefab = null;
+    [SerializeField] private AudioClip[] explosionClips = null;
 
     [SerializeField] private float heightOffset = 0.2f;
     [SerializeField] private float explosionStrenght = 5f;
@@ -13,6 +14,8 @@ public class ExplosiveLuggage : Luggage
     [SerializeField] private float explosionUpForce = 1f;
 
     private static VisualEffect explosionParticle = null;
+
+    private AudioSource audioSource;
 
     Player player;
     Player Player { get { if (player == null) player = Gamemanager.Instance.Player; return player; } }
@@ -23,6 +26,8 @@ public class ExplosiveLuggage : Luggage
         {
             explosionParticle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,6 +50,8 @@ public class ExplosiveLuggage : Luggage
 
             explosionParticle.transform.position = transform.position;
             explosionParticle.Play();
+
+            audioSource.PlayOneShot(explosionClips[Random.Range(0, explosionClips.Length)]);
 
             SectionsManager.Instance.ReplaceLuggage(this.transform);
         }

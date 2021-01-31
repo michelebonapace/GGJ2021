@@ -107,6 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75024e783c9fb764f8bd55cad8c75c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceClips:
+  - {fileID: 8300000, guid: 11e18c0815877c74f9b421a7979f578f, type: 3}
+  - {fileID: 8300000, guid: bc5306a612768c049ac38ac3cf63522e, type: 3}
+  - {fileID: 8300000, guid: c53634336e3b9a24286e669a996e0077, type: 3}
   heightOffset: 0.2
   bounceStrenght: 25
 --- !u!54 &7104232570545818989

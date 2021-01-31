@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 8970286903135517713, guid: 5734b93f1f5545e4a92c5bfe80396182,
     type: 3}
+  explosionClips:
+  - {fileID: 8300000, guid: d4589850eba2d9445a4d482c602f3fb3, type: 3}
   heightOffset: 0.2
   explosionStrenght: 40
   explosionRadius: 5
