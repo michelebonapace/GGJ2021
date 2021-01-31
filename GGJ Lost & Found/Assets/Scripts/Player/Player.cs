@@ -8,4 +8,5 @@ public class Player : MonoBehaviour
     public Rigidbody Body { get => body; }
 
     public virtual void StunPlayer() { }
+    public virtual void Scream() { }
 }

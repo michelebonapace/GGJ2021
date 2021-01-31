@@ -958,7 +958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7239156067567268757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: -0.35}
+  m_LocalPosition: {x: 0, y: 1.3, z: -0.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7239156068194024772}
@@ -1470,6 +1470,29 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 3
   stunTime: 1
+  bounceClips:
+  - {fileID: 8300000, guid: 11e18c0815877c74f9b421a7979f578f, type: 3}
+  - {fileID: 8300000, guid: bc5306a612768c049ac38ac3cf63522e, type: 3}
+  - {fileID: 8300000, guid: c53634336e3b9a24286e669a996e0077, type: 3}
+  footstepClips:
+  - {fileID: 8300000, guid: b2bcbf6446b7e324d80cb0de0082af46, type: 3}
+  - {fileID: 8300000, guid: 3553582f8a7f19d4187f8c03e5d70c90, type: 3}
+  - {fileID: 8300000, guid: 7b33ada5425e3db42aac998caecdce31, type: 3}
+  - {fileID: 8300000, guid: 270c5d9c8e525ba45a6e3963ac60870f, type: 3}
+  hitClips:
+  - {fileID: 8300000, guid: e6c5a37dfe5eff8468083b741ecc0b32, type: 3}
+  - {fileID: 8300000, guid: 92aa15d27f3454d488e2b7b3de9ae966, type: 3}
+  - {fileID: 8300000, guid: 977c4b552b89cab42843cf091c2ca1a4, type: 3}
+  - {fileID: 8300000, guid: bc33f8221f3f26749849e724672f1f9c, type: 3}
+  jumpClips:
+  - {fileID: 8300000, guid: ce7d36c6fdcd19d4d9ad23a118ce139f, type: 3}
+  - {fileID: 8300000, guid: bb01390d55dbca446a6ca0cbe4f383b3, type: 3}
+  - {fileID: 8300000, guid: 0d08fd85f3b991d4a94a0a668ad41e9f, type: 3}
+  screamClips:
+  - {fileID: 8300000, guid: 3a68f31a92fccda4b8b553d67eff5c3b, type: 3}
+  - {fileID: 8300000, guid: 00b7122e66ee1b74ebdf3f0eb67d1655, type: 3}
+  - {fileID: 8300000, guid: 62fe29475a90d8e47973125551fee239, type: 3}
+  - {fileID: 8300000, guid: a464c029954797849bc296a1a8cc9f23, type: 3}
   feet: {fileID: 7239156067700090340}
   groundMask:
     serializedVersion: 2
