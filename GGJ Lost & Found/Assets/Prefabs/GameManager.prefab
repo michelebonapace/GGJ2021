@@ -49,5 +49,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ee97a932365b74349b2a7d4b27784036, type: 3}
   - {fileID: 8300000, guid: 192a6b1b23974be4786c2e66f25250ea, type: 3}
   - {fileID: 8300000, guid: 783815aabe925a64eaf413e6bf4f7607, type: 3}
-  gameTime: 480
-  endGame: 0
+  gameTime: 60

@@ -78,7 +78,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8970286903135517713, guid: 5734b93f1f5545e4a92c5bfe80396182,
     type: 3}
   heightOffset: 0.2
-  explosionStrenght: 5
+  explosionStrenght: 40
   explosionRadius: 5
   explosionUpForce: 1
 --- !u!1001 &5833894745147222661
