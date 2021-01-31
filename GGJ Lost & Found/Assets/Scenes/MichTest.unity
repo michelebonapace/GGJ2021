@@ -234,9 +234,9 @@ MonoBehaviour:
   instancesPerSection: 3
   sectionsHeight: 10
   sectionsPrefabs:
-  - {fileID: 5675931931499907872, guid: 1defe9fae863d9e4797f70335d09f390, type: 3}
-  - {fileID: 4612985391548775241, guid: a1958f3f140e7c247bc3fdc040c26d5d, type: 3}
-  - {fileID: 4086450416356862741, guid: 519ac6f18610b344d8f1d5f0310a53dd, type: 3}
+  - {fileID: 6956346201176807066, guid: 6ccc5b1b74849ff44999235297c28c5f, type: 3}
+  - {fileID: 8482820509912290067, guid: a1958f3f140e7c247bc3fdc040c26d5d, type: 3}
+  - {fileID: 8057233463071479709, guid: 519ac6f18610b344d8f1d5f0310a53dd, type: 3}
   normalLuggage:
   - {fileID: 8916567325269838919, guid: 994ca882b1e4f4e4db0833a602639094, type: 3}
   - {fileID: 1546933288627002218, guid: efc9804326f72314381697312c492e04, type: 3}
