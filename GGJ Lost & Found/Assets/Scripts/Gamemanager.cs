@@ -9,9 +9,15 @@ public class Gamemanager : Singleton<Gamemanager>
     public event Action OnGameStart;
     public event Action OnGameEnd;
 
+    public AudioClip readyClip;
+    public AudioClip goClip;
+
+    public AudioClip[] endGameClips;
+
     public float gameTime;
 
     private Player player;
+    private AudioSource audioSource;
 
     private int totalScore = 0;
     private float gameTimer = 0f;
@@ -55,9 +61,7 @@ public class Gamemanager : Singleton<Gamemanager>
         }
         else if (hasGameStarted)
         {
-            hasGameStarted = false;
-
-            OnGameEnd?.Invoke();
+            EndGame();
         }
     }
 
@@ -83,7 +87,7 @@ public class Gamemanager : Singleton<Gamemanager>
     {
         if (Player != null)
         {
-            StartNewGame();
+            StartCoroutine(GamePreparations());
         }
     }
 
@@ -93,5 +97,31 @@ public class Gamemanager : Singleton<Gamemanager>
         hasGameStarted = true;
 
         OnGameStart?.Invoke();
+    }
+
+    public void EndGame()
+    {
+        hasGameStarted = false;
+
+        audioSource.PlayOneShot(endGameClips[UnityEngine.Random.Range(0, endGameClips.Length)]);
+
+        OnGameEnd?.Invoke();
+    }
+
+    private IEnumerator GamePreparations()
+    {
+        audioSource = Player.GetComponent<AudioSource>();
+        Player.enabled = false;
+
+        yield return new WaitForSeconds(3f);
+
+        audioSource.PlayOneShot(readyClip);
+
+        yield return new WaitForSeconds(0.5f);
+
+        audioSource.PlayOneShot(goClip);
+        player.enabled = true;
+
+        StartNewGame();
     }
 }

@@ -5,17 +5,29 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : Player
 {
-
-    [SerializeField] public ActiveRagdollMovement _activeRagdoll;
-    [SerializeField] public AnimationController _animationController;
-    [SerializeField] public PhysicsHandler _physics;
+    public ActiveRagdollMovement _activeRagdoll;
+    public AnimationController _animationController;
+    public PhysicsHandler _physics;
+    public AudioSource _audioSource;
 
     [SerializeField] private bool _enableMovement = true;
     [SerializeField] private float _jumpForce = 3f;
 
+    #region AUDIO
+
+    [SerializeField] private AudioClip[] _bounceClips = null;
+    [SerializeField] private AudioClip[] _footstepClips = null;
+    [SerializeField] private AudioClip[] _hitClips = null;
+    [SerializeField] private AudioClip[] _jumpClips = null;
+    [SerializeField] private AudioClip[] _screamClips = null;
+
+    #endregion
+
     private Vector2 _movement;
 
     private Vector3 _aimDirection;
+
+    private float screamTimer = 10f;
 
     private void Start()
     {
@@ -30,6 +42,22 @@ public class CharacterController : Player
 
         _aimDirection = Camera.main.transform.forward;
         _animationController.AimDirection = _aimDirection;
+
+        //if (footIsOnGround)
+        //{
+        //    _audioSource.PlayOneShot(_footstepClips[Random.Range(0, _footstepClips.Length)]);
+        //}
+
+        if (screamTimer > 0)
+        {
+            screamTimer -= Time.deltaTime;
+        }
+        else
+        {
+            _audioSource.PlayOneShot(_screamClips[Random.Range(0, _screamClips.Length)]);
+
+            screamTimer += Random.Range(10f, 15f);
+        }
     }
 
     private void FixedUpdate()
@@ -70,6 +98,11 @@ public class CharacterController : Player
         //}
     }
 
+    public override void StunPlayer()
+    {
+        _audioSource.PlayOneShot(_hitClips[Random.Range(0, _hitClips.Length)]);
+    }
+
     private void OnMove(InputValue value)
     {
         _movement = value.Get<Vector2>();
@@ -78,6 +111,8 @@ public class CharacterController : Player
     private void OnJump(InputValue value)
     {
         _animationController.Animator.SetTrigger("Jump");
+
+        _audioSource.PlayOneShot(_jumpClips[Random.Range(0, _jumpClips.Length)]);
 
         body.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }

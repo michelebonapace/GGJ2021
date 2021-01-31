@@ -43,4 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002d32063e05fa94d892e6f627d730b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  readyClip: {fileID: 8300000, guid: 4193a194634e4bf46935a5b2fa6fbde3, type: 3}
+  goClip: {fileID: 8300000, guid: 0efc991166652fb449e08a45539d90fb, type: 3}
+  endGameClips:
+  - {fileID: 8300000, guid: ee97a932365b74349b2a7d4b27784036, type: 3}
+  - {fileID: 8300000, guid: 192a6b1b23974be4786c2e66f25250ea, type: 3}
+  - {fileID: 8300000, guid: 783815aabe925a64eaf413e6bf4f7607, type: 3}
   gameTime: 480
+  endGame: 0
