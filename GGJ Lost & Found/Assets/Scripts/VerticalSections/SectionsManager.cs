@@ -63,7 +63,7 @@ public class SectionsManager : MonoBehaviour
                         }
                         else if (rand < 90)
                         {
-                            Instantiate(explosiveLuggage, t.transform.position + Vector3.up * 2, explosiveLuggage.transform.rotation);
+                            Instantiate(bouncingLuggage, t.transform.position + Vector3.up * 2, bouncingLuggage.transform.rotation);
                         }
                         else
                         {
