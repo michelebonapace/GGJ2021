@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerController : Player
 {
-
     [Header("Stats")]
     [SerializeField]
     private float jumpForce;
@@ -18,6 +18,8 @@ public class PlayerController : Player
     private float stunTime;
 
     private List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
+    private Animator animator;
+    private AudioSource audioSource;
 
     private Vector3 totalBeltSpeed = Vector3.zero;
     private Vector2 movInput;
@@ -28,7 +30,15 @@ public class PlayerController : Player
     private bool isGrounded = false;
     private bool isMoving = false;
 
-    private Animator animator;
+    #region AUDIO
+
+    [SerializeField] private AudioClip[] bounceClips = null;
+    [SerializeField] private AudioClip[] footstepClips = null;
+    [SerializeField] private AudioClip[] hitClips = null;
+    [SerializeField] private AudioClip[] jumpClips = null;
+    [SerializeField] private AudioClip[] screamClips = null;
+
+    #endregion
 
     #region GROUND CHECK
 
@@ -46,6 +56,8 @@ public class PlayerController : Player
             body = GetComponent<Rigidbody>();
         if (animator == null)
             animator = GetComponent<Animator>();
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -60,6 +72,7 @@ public class PlayerController : Player
         {
             isStunned = false;
         }
+
         CheckRun();
     }
 
@@ -121,12 +134,19 @@ public class PlayerController : Player
     {
         stunTimer = stunTime;
         isStunned = true;
+
+        audioSource.PlayOneShot(hitClips[Random.Range(0, hitClips.Length)]);
+    }
+    public override void Scream()
+    {
+        audioSource.PlayOneShot(screamClips[Random.Range(0, screamClips.Length)]);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (isGrounded)
         {
+            audioSource.PlayOneShot(jumpClips[Random.Range(0, jumpClips.Length)]);
             body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
@@ -148,7 +168,7 @@ public class PlayerController : Player
         {
             animator.SetBool("Run", true);
         }
-        else 
+        else
         {
             animator.SetBool("Run", false);
         }

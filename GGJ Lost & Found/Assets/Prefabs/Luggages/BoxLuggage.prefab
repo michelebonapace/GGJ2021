@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6971289432594836882}
   - component: {fileID: 7206195816938968122}
   - component: {fileID: -5982100980156236149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BoxLuggage
   m_TagString: Luggage
   m_Icon: {fileID: 0}
