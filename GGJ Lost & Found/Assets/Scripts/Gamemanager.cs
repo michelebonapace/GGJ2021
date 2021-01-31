@@ -108,9 +108,12 @@ public class Gamemanager : Singleton<Gamemanager>
     {
         hasGameStarted = false;
 
+        PlayerPrefs.SetInt("Score", totalScore);
+
         audioSource.PlayOneShot(endGameClips[UnityEngine.Random.Range(0, endGameClips.Length)]);
 
         OnGameEnd?.Invoke();
+        LoadScene(0);
     }
 
     private IEnumerator GamePreparations()
