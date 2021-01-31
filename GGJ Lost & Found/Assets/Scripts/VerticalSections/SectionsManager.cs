@@ -10,7 +10,7 @@ public class SectionsManager : MonoBehaviour
     public float sectionsHeight = 5;
     public GameObject[] sectionsPrefabs;
 
-    private List<GameObject> sectionsInstances;
+    private List<Section> sectionsInstances;
 
     private int totalSections;
     private int currentHeightIndex;
@@ -25,9 +25,9 @@ public class SectionsManager : MonoBehaviour
     {
         totalSections = instancesPerSection * sectionsPrefabs.Length;
         currentHeightIndex = totalSections / 2;
-        sectionsInstances = new List<GameObject>();
+        sectionsInstances = new List<Section>();
         for (int i = 0; i < totalSections; i++)
-            sectionsInstances.Add(Instantiate(sectionsPrefabs[i % sectionsPrefabs.Length], transform.position + sectionsHeight * i * Vector3.up, Quaternion.identity, this.transform));
+            sectionsInstances.Add(Instantiate(sectionsPrefabs[i % sectionsPrefabs.Length], transform.position + sectionsHeight * i * Vector3.up, Quaternion.identity, this.transform).GetComponent<Section>());
     }
 
     public void OnPlayerChangeSection(float height)
@@ -37,20 +37,26 @@ public class SectionsManager : MonoBehaviour
         int distance = index - currentHeightIndex;
         if (distance > 0)
         {
-            GameObject s = sectionsInstances[0];
+            Section s = sectionsInstances[0];
             s.transform.position = sectionsInstances[totalSections - 1].transform.position + sectionsHeight * Vector3.up;
             sectionsInstances.RemoveAt(0);
             sectionsInstances.Add(s);
             currentHeightIndex++;
+            sectionsInstances[0].ResetDoors();
+            sectionsInstances[totalSections - 1].ResetDoors();
+            sectionsInstances[totalSections - 2].ResetDoors();
         }
 
         else if (distance < -1)
         {
-            GameObject s = sectionsInstances[totalSections - 1];
+            Section s = sectionsInstances[totalSections - 1];
             s.transform.position = sectionsInstances[0].transform.position - sectionsHeight * Vector3.up;
             sectionsInstances.RemoveAt(totalSections - 1);
             sectionsInstances.Insert(0, s);
             currentHeightIndex--;
+            sectionsInstances[0].ResetDoors();
+            sectionsInstances[1].ResetDoors();
+            sectionsInstances[totalSections - 1].ResetDoors();
         }
 
     }

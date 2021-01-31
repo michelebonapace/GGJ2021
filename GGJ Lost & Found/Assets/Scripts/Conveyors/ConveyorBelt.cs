@@ -10,6 +10,7 @@ public class ConveyorBelt : MonoBehaviour
 
     private void Start()
     {
+        speed = 2;
         beltBody = GetComponent<Rigidbody>();
         beltBody.isKinematic = true;
     }
