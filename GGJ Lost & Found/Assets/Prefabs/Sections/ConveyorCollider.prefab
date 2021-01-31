@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4944813041438182098}
   - component: {fileID: 4944813041438182097}
   - component: {fileID: 4944813041438182096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConveyorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

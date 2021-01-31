@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7249900057227844233}
   m_Layer: 0
   m_Name: ExplosiveLuggage
-  m_TagString: Untagged
+  m_TagString: Luggage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

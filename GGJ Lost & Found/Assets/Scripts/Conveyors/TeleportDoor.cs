@@ -14,15 +14,17 @@ public class TeleportDoor : MonoBehaviour
 
     public float linkRadius;
 
+    private float currentLinkRadius;
+
     private List<Transform> teleportingObjects = new List<Transform>();
 
-    private void Start()
+    /*private void Awake()
     {
         if (linkedDoors.Count == 0)
         {
             LinkDoors();
         }
-    }
+    }*/
 
     [Button("LinkDoors")]
     public bool linkDoors;
@@ -39,14 +41,30 @@ public class TeleportDoor : MonoBehaviour
                 tempList.Add(teleportDoor);
             }
         }
+        while (tempList.Count == 0)
+        {
+            currentLinkRadius += linkRadius;
+            collisions = Physics.OverlapSphere(transform.position, currentLinkRadius);
+
+            foreach (Collider item in collisions)
+            {
+                if (item.GetComponent<TeleportDoor>() is TeleportDoor teleportDoor && teleportDoor.doorType != doorType && !tempList.Contains(teleportDoor))
+                {
+                    tempList.Add(teleportDoor);
+                }
+            }
+        }
 
         linkedDoors = tempList;
+        if (tempList.Count == 0)
+            Debug.Log("porta vuota "+ this, this);
     }
 
     public void MoveObject(Transform targetObject)
     {
         teleportingObjects.Add(targetObject);
         targetObject.position = spawnOffset.position;
+        targetObject.forward = transform.forward;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -12,7 +12,7 @@ public class SectionConverter : MonoBehaviour
 
     [Button("Convert")]
     public bool convert;
-    
+
     public void Convert()
     {
         Transform parent = Instantiate(section, transform.position, transform.rotation).GetComponent<Transform>();
@@ -53,7 +53,10 @@ public class SectionConverter : MonoBehaviour
             }
             if (t.name.Contains("Door"))
             {
-                var d = Instantiate(door, t.position, Quaternion.Euler(0,Mathf.Sign(t.position.x)*180,0), doorList);
+                var d = Instantiate(door, t.position, Quaternion.Euler(0, Mathf.Sign(t.position.x) > 0 ? 180 : 0, 0), doorList);
+                TeleportDoor td = d.GetComponent<TeleportDoor>();
+                DoorHolder dh = t.GetComponent<DoorHolder>();
+                td.doorType = dh.output ? TeleportDoor.DoorType.Output : TeleportDoor.DoorType.Input;
             }
             if (t.name.Contains("Wall"))
             {
