@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +10,11 @@ public class SectionsManager : MonoBehaviour
     public float sectionsHeight = 5;
     public GameObject[] sectionsPrefabs;
     public GameObject[] normalLuggage;
+    public GameObject[] penguins;
     public GameObject explosiveLuggage;
     public GameObject bouncingLuggage;
     public GameObject target;
+
 
     private List<Section> sectionsInstances;
 
@@ -54,7 +55,7 @@ public class SectionsManager : MonoBehaviour
                         int rand = UnityEngine.Random.Range(0, 100);
                         if (rand < 70)
                         {
-                            int r = UnityEngine.Random.Range(0, normalLuggage.Length );
+                            int r = UnityEngine.Random.Range(0, normalLuggage.Length);
                             Instantiate(normalLuggage[r], t.transform.position + Vector3.up * 2, normalLuggage[r].transform.rotation);
                         }
                         else if (rand < 80)
@@ -71,6 +72,11 @@ public class SectionsManager : MonoBehaviour
                         }
                     }
                 }
+            }
+            for (int k = 0; k < 15; k++)
+            {
+                int ra = UnityEngine.Random.Range(0, penguins.Length);
+                Instantiate(penguins[ra], sectionsInstances[i].transform.position + new Vector3(Random.Range(-10, 10), Random.Range(-3, 3), Random.Range(-30, 30)), penguins[ra].transform.rotation);
             }
         }
     }
@@ -108,7 +114,8 @@ public class SectionsManager : MonoBehaviour
 
     }
 
-    public void ReplaceLuggage(Transform luggage) {
+    public void ReplaceLuggage(Transform luggage)
+    {
         int rand = UnityEngine.Random.Range(0, totalSections);
         sectionsInstances[rand].ReplaceLuggage(luggage);
     }
