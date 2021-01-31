@@ -41,10 +41,7 @@ public class ActiveRagdollMovement : MonoBehaviour{
     public bool SyncTorsoRotations { get; set; } = true;
 
     private void OnValidate() {
-        //if (AnimatedBones == null) AnimatedBones = _animatedTorso?.GetComponentsInChildren<Transform>();
-        //if (Joints == null) Joints = _physicalTorso?.GetComponentsInChildren<ConfigurableJoint>();
         if (Rigidbodies == null) Rigidbodies = _physicalTorso?.GetComponentsInChildren<Rigidbody>();
-        //if (_bodyParts.Count == 0) GetDefaultBodyParts();
     }
 
     private void Awake() {
@@ -57,7 +54,6 @@ public class ActiveRagdollMovement : MonoBehaviour{
         foreach (BodyPart bodyPart in _bodyParts)
             bodyPart.Init();
 
-        //AnimatorHelper = _animatedAnimator.gameObject.AddComponent<AnimatorHelper>();
         if (TryGetComponent(out InputHandler temp)) Input = temp;
     }
 

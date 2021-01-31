@@ -23,7 +23,6 @@ public class AnimationController : MonoBehaviour{
     private void Start() {
         _joints = _activeRagdollMovement.Joints;
         _animatedBones = _activeRagdollMovement.AnimatedBones;
-        //_animatorHelper = _activeRagdollMovement.AnimatorHelper;
         Animator = _activeRagdollMovement.AnimatedAnimator;
 
         _initialJointsRotation = new Quaternion[_joints.Count];
@@ -44,23 +43,9 @@ public class AnimationController : MonoBehaviour{
     }
 
     private void UpdateIK() {
-        //if (!_enableIK) {
-        //    _animatorHelper.LeftArmIKWeight = 0;
-        //    _animatorHelper.RightArmIKWeight = 0;
-        //    _animatorHelper.LookIKWeight = 0;
-        //    return;
-        //}
-        //_animatorHelper.LookIKWeight = 1;
-
         AimDirection = AimDirection;
         _animTorso = _activeRagdollMovement.AnimatedTorso;
-        //_chest = _activeRagdollMovement.GetAnimatedBone(HumanBodyBones.Spine);
-        //ReflectBackwards();
         _targetDir2D = GetFloorProjection(AimDirection);
-        //CalculateVerticalPercent();
-
-        //UpdateLookIK();
-        //UpdateArmsIK();
     }
 
     public void PlayAnimation(string animation, float speed = 1) {

@@ -15,8 +15,8 @@ public class CharacterController : MonoBehaviour{
 
     private void Start() {
         _activeRagdoll.Input.OnMoveDelegates += MovementInput;
-        _activeRagdoll.Input.OnMoveDelegates += _physics.ManualTorqueInput;
-        _activeRagdoll.Input.OnFloorChangedDelegates += ProcessFloorChanged;
+        //_activeRagdoll.Input.OnMoveDelegates += _physics.ManualTorqueInput;
+        //_activeRagdoll.Input.OnFloorChangedDelegates += ProcessFloorChanged;
     }
 
     private void Update() {
@@ -57,7 +57,6 @@ public class CharacterController : MonoBehaviour{
         //}
     }
 
-    /// <summary> Make the player move and rotate </summary>
     private void MovementInput(Vector2 movement) {
         _movement = movement;
     }
