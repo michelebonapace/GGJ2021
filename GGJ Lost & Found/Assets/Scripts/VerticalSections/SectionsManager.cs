@@ -17,6 +17,7 @@ public class SectionsManager : MonoBehaviour
 
     private List<Section> sectionsInstances;
 
+    public Transform bigContainer;
     private int totalSections;
     private int currentHeightIndex;
 
@@ -89,6 +90,7 @@ public class SectionsManager : MonoBehaviour
             sectionsInstances[0].ResetDoors();
             sectionsInstances[totalSections - 1].ResetDoors();
             sectionsInstances[totalSections - 2].ResetDoors();
+            bigContainer.position += Vector3.up * sectionsHeight;
         }
 
         else if (distance < -1)
@@ -101,7 +103,13 @@ public class SectionsManager : MonoBehaviour
             sectionsInstances[0].ResetDoors();
             sectionsInstances[1].ResetDoors();
             sectionsInstances[totalSections - 1].ResetDoors();
+            bigContainer.position -= Vector3.up * sectionsHeight;
         }
 
+    }
+
+    public void ReplaceLuggage(Transform luggage) {
+        int rand = UnityEngine.Random.Range(0, totalSections - 1);
+        sectionsInstances[rand].ReplaceLuggage(luggage);
     }
 }

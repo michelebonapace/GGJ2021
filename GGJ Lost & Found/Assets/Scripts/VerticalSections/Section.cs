@@ -31,4 +31,17 @@ public class Section : MonoBehaviour
         }
     }
 
+    internal void ReplaceLuggage(Transform luggage)
+    {
+        bool found = false;
+        while (!found)
+        {
+            int rand = Random.Range(0, doors.Length - 1);
+            if (doors[rand].doorType == TeleportDoor.DoorType.Output)
+            {
+                found = true;
+                doors[rand].MoveObject(luggage);
+            }
+        }
+    }
 }

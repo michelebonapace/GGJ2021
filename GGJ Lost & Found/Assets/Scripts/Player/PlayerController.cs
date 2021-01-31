@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,6 +26,9 @@ public class PlayerController : Player
 
     private bool isStunned = false;
     private bool isGrounded = false;
+    private bool isMoving = false;
+
+    private Animator animator;
 
     #region GROUND CHECK
 
@@ -40,6 +44,8 @@ public class PlayerController : Player
     {
         if (body == null)
             body = GetComponent<Rigidbody>();
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -54,6 +60,7 @@ public class PlayerController : Player
         {
             isStunned = false;
         }
+        CheckRun();
     }
 
     private void FixedUpdate()
@@ -127,5 +134,23 @@ public class PlayerController : Player
     public void OnMove(InputAction.CallbackContext context)
     {
         movInput = context.ReadValue<Vector2>();
+        if (Vector2.Distance(movInput, Vector2.zero) < 0.1f)
+        {
+            isMoving = false;
+        }
+        else
+            isMoving = true;
+    }
+
+    private void CheckRun()
+    {
+        if (isMoving && !isStunned)
+        {
+            animator.SetBool("Run", true);
+        }
+        else 
+        {
+            animator.SetBool("Run", false);
+        }
     }
 }

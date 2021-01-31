@@ -36,8 +36,7 @@ public class ExplosiveLuggage : Luggage
             explosionParticle.transform.parent = null;
             explosionParticle.gameObject.AddComponent<DestroyByTime>().time = 1f;
             explosionParticle.Play();
-
-            Destroy(gameObject);
+            SectionsManager.Instance.ReplaceLuggage(this.transform);
         }
     }
 }
