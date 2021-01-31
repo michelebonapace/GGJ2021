@@ -10,7 +10,8 @@ public class InputHandler : MonoBehaviour
 
     public delegate void onMoveDelegate(Vector2 movement);
     public onMoveDelegate OnMoveDelegates { get; set; }
-    public void OnMove(InputValue value) {
+    public void OnMove(InputValue value)
+    {
         OnMoveDelegates?.Invoke(value.Get<Vector2>());
     }
 
@@ -22,13 +23,15 @@ public class InputHandler : MonoBehaviour
 
     public Rigidbody _rightFoot, _leftFoot;
 
-    void Update() {
+    void Update()
+    {
         UpdateOnFloor();
     }
 
     public delegate void onFloorChangedDelegate(bool onFloor);
     public onFloorChangedDelegate OnFloorChangedDelegates { get; set; }
-    private void UpdateOnFloor() {
+    private void UpdateOnFloor()
+    {
         bool lastIsOnFloor = _isOnFloor;
 
         _isOnFloor = CheckRigidbodyOnFloor(_rightFoot, out Vector3 foo)
@@ -38,7 +41,8 @@ public class InputHandler : MonoBehaviour
             OnFloorChangedDelegates(_isOnFloor);
     }
 
-    public bool CheckRigidbodyOnFloor(Rigidbody bodyPart, out Vector3 normal) {
+    public bool CheckRigidbodyOnFloor(Rigidbody bodyPart, out Vector3 normal)
+    {
         // Raycast
         Ray ray = new Ray(bodyPart.position, Vector3.down);
         bool onFloor = Physics.Raycast(ray, out RaycastHit info, floorDetectionDistance, ~(1 << bodyPart.gameObject.layer));

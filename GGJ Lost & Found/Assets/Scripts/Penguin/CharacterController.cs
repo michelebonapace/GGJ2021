@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour{
+public class CharacterController : MonoBehaviour
+{
 
     [SerializeField] public ActiveRagdollMovement _activeRagdoll;
     [SerializeField] public AnimationController _animationController;
@@ -13,13 +14,15 @@ public class CharacterController : MonoBehaviour{
 
     private Vector3 _aimDirection;
 
-    private void Start() {
+    private void Start()
+    {
         _activeRagdoll.Input.OnMoveDelegates += MovementInput;
         //_activeRagdoll.Input.OnMoveDelegates += _physics.ManualTorqueInput;
         //_activeRagdoll.Input.OnFloorChangedDelegates += ProcessFloorChanged;
     }
 
-    private void Update() {
+    private void Update()
+    {
         //_aimDirection = _cameraModule.Camera.transform.forward;
 
         _aimDirection = Camera.main.transform.forward;
@@ -27,8 +30,10 @@ public class CharacterController : MonoBehaviour{
         UpdateMovement();
     }
 
-    private void UpdateMovement() {
-        if (_movement == Vector2.zero || !_enableMovement) {
+    private void UpdateMovement()
+    {
+        if (_movement == Vector2.zero || !_enableMovement)
+        {
             _animationController.Animator.SetBool("moving", false);
             return;
         }
@@ -41,7 +46,8 @@ public class CharacterController : MonoBehaviour{
         _physics.TargetDirection = targetForward;
     }
 
-    private void ProcessFloorChanged(bool onFloor) {
+    private void ProcessFloorChanged(bool onFloor)
+    {
         //if (onFloor) {
         //    _enableMovement = true;
         //    _activeRagdoll.GetBodyPart("Head Neck")?.SetStrengthScale(1);
@@ -57,7 +63,8 @@ public class CharacterController : MonoBehaviour{
         //}
     }
 
-    private void MovementInput(Vector2 movement) {
+    private void MovementInput(Vector2 movement)
+    {
         _movement = movement;
     }
 }

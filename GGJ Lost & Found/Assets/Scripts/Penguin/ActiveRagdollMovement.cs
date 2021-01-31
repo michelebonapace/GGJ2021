@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveRagdollMovement : MonoBehaviour{
+public class ActiveRagdollMovement : MonoBehaviour
+{
 
     [SerializeField] private int _solverIterations = 13;
     [SerializeField] private int _velSolverIterations = 13;
@@ -20,7 +21,7 @@ public class ActiveRagdollMovement : MonoBehaviour{
     public List<Transform> AnimatedBones { get { return _animatedBones; } }
 
     [SerializeField] private List<ConfigurableJoint> _joints;
-    public List<ConfigurableJoint> Joints { get { return _joints;  } }
+    public List<ConfigurableJoint> Joints { get { return _joints; } }
 
     public Rigidbody[] Rigidbodies { get; private set; }
 
@@ -40,12 +41,15 @@ public class ActiveRagdollMovement : MonoBehaviour{
     public bool SyncTorsoPositions { get; set; } = true;
     public bool SyncTorsoRotations { get; set; } = true;
 
-    private void OnValidate() {
+    private void OnValidate()
+    {
         if (Rigidbodies == null) Rigidbodies = _physicalTorso?.GetComponentsInChildren<Rigidbody>();
     }
 
-    private void Awake() {
-        foreach (Rigidbody rb in Rigidbodies) {
+    private void Awake()
+    {
+        foreach (Rigidbody rb in Rigidbodies)
+        {
             rb.solverIterations = _solverIterations;
             rb.solverVelocityIterations = _velSolverIterations;
             rb.maxAngularVelocity = _maxAngularVelocity;
@@ -57,34 +61,40 @@ public class ActiveRagdollMovement : MonoBehaviour{
         if (TryGetComponent(out InputHandler temp)) Input = temp;
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         SyncAnimatedBody();
     }
 
-    private void SyncAnimatedBody() {
+    private void SyncAnimatedBody()
+    {
         if (SyncTorsoPositions)
             _animatedAnimator.transform.position = _physicalTorso.position + (_animatedAnimator.transform.position - _animatedTorso.position);
 
-        if (SyncTorsoRotations) 
+        if (SyncTorsoRotations)
             _animatedAnimator.transform.rotation = _physicalTorso.rotation;
     }
 
-    public Transform GetAnimatedBone(HumanBodyBones bone) {
+    public Transform GetAnimatedBone(HumanBodyBones bone)
+    {
         return _animatedAnimator.GetBoneTransform(bone);
     }
 
-    public Transform GetPhysicalBone(HumanBodyBones bone) {
+    public Transform GetPhysicalBone(HumanBodyBones bone)
+    {
         return _physicalAnimator.GetBoneTransform(bone);
     }
 
-    public BodyPart GetBodyPart(string name) {
+    public BodyPart GetBodyPart(string name)
+    {
         foreach (BodyPart bodyPart in _bodyParts)
             if (bodyPart.bodyPartName == name) return bodyPart;
 
         return null;
     }
 
-    public void SetStrengthScaleForAllBodyParts(float scale) {
+    public void SetStrengthScaleForAllBodyParts(float scale)
+    {
         foreach (BodyPart bodyPart in _bodyParts)
             bodyPart.SetStrengthScale(scale);
     }

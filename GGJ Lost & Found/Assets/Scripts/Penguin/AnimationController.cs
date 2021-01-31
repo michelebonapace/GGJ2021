@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationController : MonoBehaviour{
-    
+public class AnimationController : MonoBehaviour
+{
+
     [SerializeField] protected ActiveRagdollMovement _activeRagdollMovement;
     public ActiveRagdollMovement ActiveRagdollMovement { get { return _activeRagdollMovement; } }
 
@@ -20,40 +21,48 @@ public class AnimationController : MonoBehaviour{
     private Transform _animTorso, _chest;
     private float _targetDirVerticalPercent;
 
-    private void Start() {
+    private void Start()
+    {
         _joints = _activeRagdollMovement.Joints;
         _animatedBones = _activeRagdollMovement.AnimatedBones;
         Animator = _activeRagdollMovement.AnimatedAnimator;
 
         _initialJointsRotation = new Quaternion[_joints.Count];
-        for (int i = 0; i < _joints.Count; i++) {
+        for (int i = 0; i < _joints.Count; i++)
+        {
             _initialJointsRotation[i] = _joints[i].transform.localRotation;
         }
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         UpdateJointTargets();
         UpdateIK();
     }
 
-    private void UpdateJointTargets() {
-        for (int i = 0; i < _joints.Count; i++) {
+    private void UpdateJointTargets()
+    {
+        for (int i = 0; i < _joints.Count; i++)
+        {
             ConfigurableJointExtensions.SetTargetRotationLocal(_joints[i], _animatedBones[i + 1].localRotation, _initialJointsRotation[i]);
         }
     }
 
-    private void UpdateIK() {
+    private void UpdateIK()
+    {
         AimDirection = AimDirection;
         _animTorso = _activeRagdollMovement.AnimatedTorso;
         _targetDir2D = GetFloorProjection(AimDirection);
     }
 
-    public void PlayAnimation(string animation, float speed = 1) {
+    public void PlayAnimation(string animation, float speed = 1)
+    {
         Animator.Play(animation);
         Animator.SetFloat("speed", speed);
     }
 
-    public static Vector3 GetFloorProjection(in Vector3 vec) {
+    public static Vector3 GetFloorProjection(in Vector3 vec)
+    {
         return Vector3.ProjectOnPlane(vec, Vector3.up).normalized;
     }
 }
