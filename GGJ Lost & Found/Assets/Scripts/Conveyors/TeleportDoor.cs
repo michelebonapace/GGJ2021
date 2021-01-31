@@ -18,13 +18,13 @@ public class TeleportDoor : MonoBehaviour
 
     private List<Transform> teleportingObjects = new List<Transform>();
 
-    private void Start()
+    /*private void Awake()
     {
         if (linkedDoors.Count == 0)
         {
             LinkDoors();
         }
-    }
+    }*/
 
     [Button("LinkDoors")]
     public bool linkDoors;
@@ -56,6 +56,8 @@ public class TeleportDoor : MonoBehaviour
         }
 
         linkedDoors = tempList;
+        if (tempList.Count == 0)
+            Debug.Log("porta vuota "+ this, this);
     }
 
     public void MoveObject(Transform targetObject)
